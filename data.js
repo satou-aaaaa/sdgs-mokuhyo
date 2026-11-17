@@ -231,7 +231,7 @@
 
   // 1問を作る。tag は「種類|種」（例 "6.1|2026-11-17:d0"）。同じ tag ならいつも同じ問題
   function make(tag) {
-    const [kind] = String(tag).split("|"), k = BY[kind];
+    const [kind] = String(tag).split("|"), k = Object.prototype.hasOwnProperty.call(BY, kind) ? BY[kind] : null;
     if (!k) return null;
     const p = k.make(rng(seedOf(tag)), k.lv);
     return { tag, kind, lv: k.lv, name: k.name, look: k.look, key: k.key, why: k.why, goal: GOALS[k.a], grp: k.grp, gwhy: GRP_WHY[k.grp], src: k.src.map((s) => SRC[s]), ...p };
