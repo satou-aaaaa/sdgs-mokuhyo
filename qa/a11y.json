@@ -2,7 +2,7 @@
   "screens": [
     { "name": "今日の5問", "click": ["#go-d"] },
     { "name": "練習", "click": ["#go-p"] },
-    { "name": "ようす帳", "click": ["#go-dex"] },
+    { "name": "ターゲット帳", "click": ["#go-dex"] },
     { "name": "このゲームについて", "click": ["#f-about"] }
   ]
 }
