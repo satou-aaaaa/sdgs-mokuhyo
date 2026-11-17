@@ -108,7 +108,7 @@ check("乱数は sort の比較の中で引かない（ブラウザで引く回�
 check("言い方：「必ず達成」「絶対」と言い切らない・アイコン（国連の色の四角・輪）を画像で入れない", !/必ず達成|絶対に/.test(html + gen + readme) && !/<img|<svg[^>]*class="sdg/.test(html));
 { const howto = (html.match(/<dialog id="howto"[\s\S]*?<\/dialog>/) || [""])[0], ab = (html.match(/function about\(\)[\s\S]*?\n}/) || [""])[0], dis = (t) => /公式の情報の代わりではありません/.test(t) && /仮訳/.test(t) && /言いかえ/.test(t);
   check("言い方：遊び方・「このゲームについて」・README のどれにも、仮訳を言いかえた文であること・公式の情報の代わりではないことがある", dis(howto) && dis(ab) && dis(readme), `遊び方 ${dis(howto)}・について ${dis(ab)}・README ${dis(readme)}`); }
-check("写し元（震度よみ・憲法のしくみ）の言葉が残っていない（game-dev.md A 手順5）", !/震度|気象庁|解説表|地震|jma\\.go|shd|SHD|ようす帳|憲法|kenpo|kps|KPS/.test(html + gen + readme));
+check("写し元（震度よみ・憲法のしくみ）の言葉が残っていない（共通部品 store の中は除く・game-dev.md A 手順5）", !/震度|気象庁|解説表|地震|jma\\.go|shd|SHD|ようす帳|憲法|kenpo|kps|KPS/.test(html.replace(/<!-- store:begin[\s\S]*?<!-- store:end -->/, "") + gen + readme));
 check("画面にお笑いの言葉を入れない（本物っぽく）", !/お笑い|ギャグ|ツッコミ|なんでやねん|（うそ）/.test(html + gen));
 check("引き継ぎ：transfer.js をゲームの script より前に、このゲームの記録のキー（記録・文字・復習）だけで読む・depth.js も前に読む", /<script src="transfer\.js" data-game="sdgs-mokuhyo" data-keys="sdg-v1,sdg-fs,sdg-depth"><\/script>\s*<script src="depth\.js" data-game="sdgs-mokuhyo" data-key="sdg-depth"><\/script>\s*<\/head>/.test(html) && html.indexOf('src="transfer.js"') < html.indexOf('src="data.js"') && /data-hk/.test(html) && existsSync(path.join(root, "transfer.js")));
 check("好きなだけ遊べる：チケット・回数の上限・🔒で開くモードを入れない（game-dev.md F1・F2）", !/🎫|チケット|すると開く|🔒/.test(html) && !/\blife\b|ELIFE/.test(html));
